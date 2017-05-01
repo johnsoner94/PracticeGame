@@ -9,10 +9,9 @@ public class ShowGUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		text = GetComponent<TextMesh> ();
-		//text = FindObjectOfType<TextMesh>();
-		text.GetComponent<Renderer>().enabled = false;
-
+		text.GetComponent<Renderer> ().enabled = false;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,4 +27,3 @@ public class ShowGUI : MonoBehaviour {
 	}
 		
 }
-	

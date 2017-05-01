@@ -9,7 +9,7 @@ public class HealthManager : MonoBehaviour {
 
 	public static int playerHealth;
 
-	private int maxPlayerHealth;
+	public int maxPlayerHealth;
 
 	//Text text;
 
@@ -30,13 +30,13 @@ public class HealthManager : MonoBehaviour {
 		//text = GetComponent<Text> ();
 		healthBar = GetComponent<Slider>();
 
-		maxPlayerHealth = PlayerPrefs.GetInt ("health");
-
 		playerHealth = maxPlayerHealth;
 
 		levelManager = FindObjectOfType<LevelManager> ();
 
 		lifeSystem = FindObjectOfType<LifeManager> ();
+
+		playerHealth = PlayerPrefs.GetInt ("health", maxPlayerHealth);
 
 		isDead = false;
 	}

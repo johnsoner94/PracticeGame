@@ -1,21 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Assets/Scripts/MiniGame2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Assets/Scripts/MiniGame2.cs" Line="26" Column="22" />
-      <File FileName="Assets/Assets/Scripts/MiniGame.cs" Line="20" Column="24" />
-      <File FileName="Assets/Assets/Scripts/LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/DestroyObjectOverTime.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/QuietSound.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/AudioPlay.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/LevelLoader.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/L3BossHealthManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/HealthManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/LifeManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/EnemyContol.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Scripts/EnemyHealthManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Assets/Scripts/PlayerController.cs" Line="243" Column="103" />
+      <File FileName="Assets/Assets/Scripts/NinjaStarController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

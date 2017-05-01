@@ -66,6 +66,8 @@ public class LevelManager : MonoBehaviour {
 	void Update () {
 		if (currentCheckpoint.name == "Spikes Checkpoint") {
 			camera.distance = 5.0F;
+		} else if(currentCheckpoint.name == "Checkpoint (1) L3" || currentCheckpoint.name == "Checkpoint (2) L3") {
+			camera.distance = 1.0F;
 		} else {
 			camera.distance = 4.0F;
 		}

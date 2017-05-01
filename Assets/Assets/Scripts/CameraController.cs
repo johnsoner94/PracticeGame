@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-	public PlayerController player;
+	public PlayerController player;   // player
 
-	public bool isFollowing;
+	public bool isFollowing;       // to tell if following player
 
-	public float xOffset;
-	public float yOffset;
+	public float xOffset;       // camera offset x
+	public float yOffset;       // camera offset y
 
-	private bool loweredView;
+	private bool loweredView;        // to tell if in lowered view
 
 
 	//From online suggestion
@@ -25,25 +25,25 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		player = FindObjectOfType<PlayerController> ();
+		player = FindObjectOfType<PlayerController> ();  // find & set player
 
-		isFollowing = true;
+		isFollowing = true;               // set isFollowing true
 
-		loweredView = false;
+		loweredView = false;              // set loweredView false
 
-		transform.position = new Vector3 (player.transform.position.x + xOffset, player.transform.position.y + yOffset, transform.position.z);
-		distance = 4.0F;
+		transform.position = new Vector3 (player.transform.position.x + xOffset, player.transform.position.y + yOffset, transform.position.z);  // set camera position
+		distance = 4.0F;                  // set distance
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (isFollowing && !loweredView) {
-			transform.position = new Vector3 (player.transform.position.x + xOffset, player.transform.position.y + yOffset, transform.position.z);
+		if (isFollowing && !loweredView) {  // If normal view...
+			transform.position = new Vector3 (player.transform.position.x + xOffset, player.transform.position.y + yOffset, transform.position.z);  // camera follows player
 		} 
 
-		if (Input.GetButton("Fire3")) {
-			if (transform.position.y >= player.transform.position.y - distance) {
+		if (Input.GetButton("Fire3")) {     // If button pressed...
+			if (transform.position.y >= player.transform.position.y - distance) {   // camera position goes to loweredView
 				//From online suggestion
 				t += Time.fixedDeltaTime;
 				result = Mathf.Lerp (0, 100, t / speed);

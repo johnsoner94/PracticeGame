@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BombController : MonoBehaviour {
-	public int damageToGive;
-	public GameObject impactEffect;
+	public int damageToGive;                // how much damage bomb gives
+	public GameObject impactEffect;         // particle effect for bomb
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.name == "Player") {
+		if (other.name == "Player") {               // If bomb hits player
 			
-			HealthManager.HurtPlayer (damageToGive);
+			HealthManager.HurtPlayer (damageToGive);    // Hurt player
 		}
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        Instantiate(impactEffect, transform.position, transform.rotation);   // Make particle effect
+        Destroy(gameObject);    // destroy bomb
        
         
     }

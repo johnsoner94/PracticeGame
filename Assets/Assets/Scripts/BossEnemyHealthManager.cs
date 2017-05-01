@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossEnemyHealthManager : MonoBehaviour {
 
-	private int bossHealth;
+	public int bossHealth;
 	public int pointsOnDeath;
 
 	public GameObject deathEffect;
@@ -34,11 +34,6 @@ public class BossEnemyHealthManager : MonoBehaviour {
     void Start () {
 		audioDie = GetComponent<AudioSource>();
 
-
-		//Setting boss health here, so I can test animations with it.
-		//CASIEFor some reason damange from ninja stars is 2, not 1 like it says....
-		bossHealth = 12;
-
 		//Start all bools as false
 		isDead = false;
 		hitOnce = false;
@@ -50,6 +45,8 @@ public class BossEnemyHealthManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+	
 
 		//Set up animation bools for various anger of character
 		anim.SetBool ("hitOnce", hitOnce);     // set anim for when boss is hit once
@@ -83,14 +80,14 @@ public class BossEnemyHealthManager : MonoBehaviour {
 	{
 		//When boss is hit with projectiles, reduce health.
 		bossHealth -= damageToGive;
-		Debug.Log ("Giving Boss damage");
+		Debug.Log ("boss health is" + bossHealth);
 
-		if (bossHealth == 10) {
+		if (bossHealth == 12) {
 			Debug.Log ("hitting boss once, bosshealth is" + bossHealth);
 			hitOnce = true;
 
 		}
-		if (bossHealth == 8) {
+		if (bossHealth <= 8) {
 			hitOnce = true;
 			hitTwice = true;
 			Debug.Log("hitting boss twice, bosshealth is" + bossHealth);

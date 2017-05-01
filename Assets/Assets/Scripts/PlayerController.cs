@@ -19,13 +19,10 @@ public class PlayerController : MonoBehaviour {
 	private Animator anim;             // animator object
 
 	public Transform upperFirePoint;        // transform object for detecting where to shoot from
-	//public Transform lowerFirePoint;        // transform object for detecting where to shoot from  //UNUSED
 	public Transform firePoint;        // transform object for detecting where to shoot from
 	public GameObject ninjaStar;       // ninjaStar object
     public GameObject upBullet;       // upBullet object
-    //public GameObject downBullet;       // downBullet object        //UNUSED
     public GameObject machineGunBullet;       // machineGunBullet object
-	//public GameObject diagonalBullet;       // diagonalBullet object         //UNUSED
 	public GameObject deathRay;         // deathRay object
 
 	public float shotDelay;             // float for delay between shots
@@ -52,11 +49,11 @@ public class PlayerController : MonoBehaviour {
 
 	public bool rapidFire;        // tells if in rapid fire
 
-    public bool onLadder;         // Variables to climb ladder JG 3/24/17
-    public bool movingOnLadder;
-    public float climbSpeed;
-    private float climbVelocity;
-    private float gravityStore;
+    public bool onLadder;         // Variables to climb ladder
+    public bool movingOnLadder;   // bool for ladder animation
+    public float climbSpeed;      // how fast the player move's on the ladder
+    private float climbVelocity;   // adjusts the player's velocity on ladder
+    private float gravityStore;    // saves player's gravity setting
 
     public bool speedMode;      // variable to tell if speedMode is active 
     public float speedUp;        // variable to set speedMode speed
@@ -66,11 +63,9 @@ public class PlayerController : MonoBehaviour {
 	/// <summary>
 	/// Audio stuff
 	/// </summary>
-	//public AudioClip clipShot;     // Changed 4-13-17 JG attached sound directly to 
-                                     // ninjaStar, to ease adding sound to powerups
-	public AudioClip clipJetPack;
+	
+	public AudioClip clipJetPack;   // sound for doublejump
     public AudioClip clipKnock;     // sound for knockback
-	//private AudioSource audioShoot;
 	private AudioSource audioJump;
     private AudioSource audioKnock;
 
@@ -100,13 +95,13 @@ public class PlayerController : MonoBehaviour {
 
 		knockbackCount = 0;							// Emily added this so that the character doesn't knockback at the load of the scene.
 		knockbackCount2 = 0;
-		grounded = true;
-		doubleJumped = false;
-        gunDisabled = false;
-        upShootDisabled = false;
-		rapidFire = false;
-        speedMode = false;
-        gravityStore = myrigidbody2D.gravityScale;        // Stores gravity for climbing ladders JG 3/24/17
+		grounded = true;                    // set grounded true
+		doubleJumped = false;               // set doublejump false
+        gunDisabled = false;                // set gun active
+        upShootDisabled = false;            // set upshooting active
+		rapidFire = false;                  // set rapid fire inactive
+        speedMode = false;                  // set speedMode inactive
+        gravityStore = myrigidbody2D.gravityScale;        // Stores gravity for climbing ladders 
 
 
 	}
@@ -114,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 	// Establishes if grounded
 	void FixedUpdate() {
 
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatisGround);
+		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatisGround);   // checks to see if grounded
 	}
 	// Update is called once per frame
 	void Update () {
@@ -146,20 +141,20 @@ public class PlayerController : MonoBehaviour {
 		}
         
 
-		//moveVelocity = 0f;             // moveVelocity set 4/22 JG unecessary after makings changes below
+	
 
-        if (speedMode == true)
+        if (speedMode == true)           // if speedMode is active
         {
 
-            moveVelocity = speedUp * Input.GetAxisRaw("Horizontal");
+            moveVelocity = speedUp * Input.GetAxisRaw("Horizontal");        // speed up settings
         }
 
         else
         {
             // Code to move left and right
-            // Updated 4/22 JG to simplify and add Controllers
+           
 
-            moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
+            moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");  // normal speed
         }
         
 
@@ -276,11 +271,11 @@ public class PlayerController : MonoBehaviour {
         if (onLadder)                                 // if onLadder...
         {
             myrigidbody2D.gravityScale = 0f;      // No Gravity
-            doubleJumped = false;
-            grounded = true;
-            climbVelocity = climbSpeed * Input.GetAxisRaw("Vertical");
+            doubleJumped = false;             // cannot double jump
+            grounded = true;                  // grounded for animation purposes
+            climbVelocity = climbSpeed * Input.GetAxisRaw("Vertical");     // set velocity
 
-            myrigidbody2D.velocity = new Vector2(myrigidbody2D.velocity.x, climbVelocity);
+            myrigidbody2D.velocity = new Vector2(myrigidbody2D.velocity.x, climbVelocity);  // move up or down
            
 
                    
@@ -310,9 +305,9 @@ public class PlayerController : MonoBehaviour {
 			transform.parent = other.transform;         // player becomes child of platform
 		}
 
-		if (other.transform.tag == "CrumbleBox") 
+		if (other.transform.tag == "CrumbleBox")     // if player enters a crumblebox
 		{
-			other.transform.GetComponent<DestroyObjectOverTime> ().startDestroy = true;
+			other.transform.GetComponent<DestroyObjectOverTime> ().startDestroy = true;   // start destorying box
 		}
 	}
 	void OnCollisionExit2D(Collision2D other)
