@@ -11,11 +11,17 @@ public class LevelLoader : MonoBehaviour {
 
     public string levelToLoad;     // next level 
 
-	private AudioPlay[] nextLevels;
+//	private AudioPlay[] nextLevels;
+//	private AudioSource[] nextLevels;
+
+	private static AudioPlay currentAudioPlay;
+
+//	private List<AudioPlay> audioList = new List<AudioPlay>();
+//	private List<AudioSource> audioList = new List<AudioSource>();
 
 	public GameObject miniGameScreen;
 
-	public AudioSource currentAudio;
+	AudioSource currentAudio;
 
     //public float waitBetweenLevels;  // time waiting at between levels scene
 
@@ -24,68 +30,70 @@ public class LevelLoader : MonoBehaviour {
         playerInZone = false;           // player begins out of trigger-zone
 		//AudioBegin = PlayerPrefs.GetInt("AudioBegin", 0);
 
-		nextLevels = FindObjectsOfType<AudioPlay> ();
+
+		currentAudioPlay = FindObjectOfType<AudioPlay> ();
+
+		/*nextLevels = FindObjectsOfType<AudioPlay> ();
+
+		for (var i = 0; i < nextLevels.Length; i++) {
+			audioList.Add (nextLevels [i]);
+		}
 
 		Debug.Log ("The next level is: " + levelToLoad);
-//		for (var i = 0; i < nextLevels.Length; i++) {
-//			Debug.Log (i + " " + nextLevels [i]);
-//		}
-			
-
-		if (levelToLoad == "Level1") {
-			for (var i = 0; i < nextLevels.Length; i++) {
-				Debug.Log (nextLevels[i].audio.clip.name + " " + nextLevels[i].audio.isPlaying + " " + nextLevels[i].nextLevel);
-				currentAudio = nextLevels [i].audio;
-				if (currentAudio.clip.name == "Won") {
-					Debug.Log ("The current audio is: " + currentAudio.clip.name);
-					currentAudio.clip = nextLevels [i].level1;
-					currentAudio.Play ();
-				}
+		for (var i = 0; i < audioList.Count; i++) {
+			try {
+				Debug.Log (i + " " + audioList [i] + " name of clip: " + audioList [i].audio.clip.name + " is playing: " + audioList [i].audio.isPlaying);
 			}
+			catch {
+			}
+		}*/
+
+		if (levelToLoad == "Level1") {			
+			currentAudio = currentAudioPlay.getAudio();
+//			Debug.Log (currentAudio.name + " " + currentAudio.clip.name + " " + currentAudio.isPlaying);
+			if (currentAudio.clip.name == "Won") {
+//				Debug.Log ("The current audio is: " + currentAudio.clip.name);
+				currentAudio.clip = currentAudioPlay.level1;
+				currentAudio.Play ();
+			}
+			
 		}
 		else if (levelToLoad == "Level 2") {
-			for (var i = 0; i < nextLevels.Length; i++) {
-				Debug.Log (nextLevels[i].audio.clip.name + " " + nextLevels[i].audio.isPlaying + " " + nextLevels[i].nextLevel);
-				currentAudio = nextLevels [i].audio;
-				if (currentAudio.clip.name == "L1 Theme") {
-					Debug.Log ("The current audio is: " + currentAudio.clip.name);
-					currentAudio.clip = nextLevels [i].level2;
-					currentAudio.Play ();
-				}
+			currentAudio = currentAudioPlay.audio;
+			if (currentAudio.clip.name == "L1 Theme") {
+//				Debug.Log ("The current audio is: " + currentAudio.clip.name);
+				currentAudio.clip = currentAudioPlay.level2;
+				currentAudio.Play ();
 			}
+
 		}
 		else if (levelToLoad == "Level3") {
-			for (var i = 0; i < nextLevels.Length; i++) {
-				Debug.Log (nextLevels[i].audio.clip.name + " " + nextLevels[i].audio.isPlaying + " " + nextLevels[i].nextLevel);
-				currentAudio = nextLevels [i].audio;
-				if (nextLevels [i].audio.clip.name == "ThemeMusicL2" && nextLevels[i].audio.isPlaying) {
-					Debug.Log ("The current audio is: " + currentAudio.clip.name);
-					nextLevels [i].audio.clip = nextLevels [i].level3;
-					nextLevels [i].audio.Play ();
-				}
+			currentAudio = currentAudioPlay.audio;
+			if (currentAudio.clip.name == "ThemeMusicL2" && currentAudio.isPlaying) {
+//				Debug.Log ("The current audio is: " + currentAudio.clip.name);
+				currentAudio.clip = currentAudioPlay.level3;
+				currentAudio.Play ();
 			}
+
 		}	
 		else if (levelToLoad == "MainMenu") {
-			for (var i = 0; i < nextLevels.Length; i++) {
-				Debug.Log (nextLevels[i].audio.clip.name + " " + nextLevels[i].audio.isPlaying + " " + nextLevels[i].nextLevel);
-				Debug.Log ("I am here.");
-				currentAudio = nextLevels [i].audio;
-				Debug.Log ("Current audio name" + currentAudio.clip.name + " is it playing? " + currentAudio.isPlaying);
-				if ((nextLevels [i].audio.clip.name == "ThemeMusicL3" || nextLevels [i].audio.clip.name == "L3 Boss") && nextLevels [i].audio.isPlaying) {
-					Debug.Log ("The current audio is: " + currentAudio.clip.name);
-					nextLevels [i].audio.clip = nextLevels [i].win;
-					nextLevels [i].audio.Play ();
-				} else if (currentAudio.clip.name == "L1 Theme" && !currentAudio.isPlaying) {
-					currentAudio.clip = nextLevels[i].win;
-					currentAudio.Play ();
-				}
+			currentAudio = currentAudioPlay.audio;
+//			Debug.Log (currentAudio.clip.name + " " + currentAudio.isPlaying);
+//			Debug.Log ("Current audio name" + currentAudio.clip.name + " is it playing? " + currentAudio.isPlaying);
+			if ((currentAudio.clip.name == "ThemeMusicL3" || currentAudio.clip.name == "L3 Boss") && currentAudio.isPlaying) {
+//				Debug.Log ("The current audio is: " + currentAudio.clip.name);
+				currentAudio.clip = currentAudioPlay.win;
+				currentAudio.Play ();
+			} else if (currentAudio.clip.name == "L1 Theme" && !currentAudio.isPlaying) {
+				currentAudio.clip = currentAudioPlay.win;
+				currentAudio.Play ();
 			}
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && playerInZone)   // If left or up arrow is pressed at trigger-zone
+		if (Input.GetAxisRaw("Horizontal") > 0 && playerInZone)   // If left or up is pressed at trigger-zone
         {
 			if (levelToLoad == "Level1to2" || levelToLoad == "Level2to3") {
 				miniGameScreen.SetActive (true);
@@ -98,15 +106,6 @@ public class LevelLoader : MonoBehaviour {
 	}
     // Changes level using start level button
 	public void StartLevel(){
-		
-		if (levelToLoad == "MainMenu") {
-			for (var i = 0; i < nextLevels.Length; i++) {
-				if (nextLevels [i].audio.clip.name == "Won" && nextLevels [i].audio.isPlaying) {
-					nextLevels [i].audio.clip = nextLevels [i].level1;
-					nextLevels [i].audio.Play();
-				}
-			}
-		}
 
 		Application.LoadLevel (levelToLoad);
 
